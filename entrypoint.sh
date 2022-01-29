@@ -46,6 +46,10 @@ EOF
 # Run pytest
 OUTPUT=$(coverage run --rcfile=.coveragerc  -m pytest "$4")
 
+if [ $? == 1 ]
+then
+  exit 1
+fi
 
 coverage json -o coverage.json
 
@@ -54,10 +58,12 @@ export COVERAGE_TOTAL_THRESHOLD="$7"
 
 TABLE=$(python coverage_processor.py)
 
-if [ $? == 1 ]
+COVERAGE_STATUS_CODE=$?
+
+if [ $COVERAGE_STATUS_CODE == 1 ]
 then
   COV_THRESHOLD_SINGLE_FAIL=true
-elif [ $? == 2 ]
+elif [ $COVERAGE_STATUS_CODE == 2 ]
 then
   COV_THRESHOLD_TOTAL_FAIL=true
 fi
@@ -67,5 +73,3 @@ fi
 echo "::set-output name=output-table::$TABLE"
 echo "::set-output name=cov-threshold-single-fail::$COV_THRESHOLD_SINGLE_FAIL"
 echo "::set-output name=cov-threshold-total-fail::$COV_THRESHOLD_TOTAL_FAIL"
-
-
