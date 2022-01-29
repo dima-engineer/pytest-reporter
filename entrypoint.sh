@@ -9,6 +9,7 @@
 # $7: cov-threshold-total
 
 ls
+pwd
 
 PACKAGE_MANAGER=${1:-"pip"}
 
