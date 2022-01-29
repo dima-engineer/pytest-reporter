@@ -64,7 +64,6 @@ runs:
         fi
       shell: bash
     - run: |
-        echo "Sha: $(git log -1 --pretty=format:%h)"
         echo "SHORT_SHA=`echo ${{github.event.after}} | cut -c1-7`" >> $GITHUB_ENV
         echo "PULL_NUMBER=`echo ${{ github.event.pull_request.number }}`" >> $GITHUB_ENV
         echo "COMMIT_URL=`echo https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/commits/${{ github.event.after }}`" >> $GITHUB_ENV
