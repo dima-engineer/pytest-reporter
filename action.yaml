@@ -41,7 +41,7 @@ runs:
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
-    - run: \
+    - run: |
         ${{ github.action_path }}/entrypoint.sh \
         ${{ inputs.package-manager }} \
         ${{ inputs.requirements-file }} \
