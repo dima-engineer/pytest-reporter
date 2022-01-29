@@ -71,12 +71,12 @@ runs:
 #          ${{ steps.pytester-cov.outputs.output-table }}
 #        edit-mode: replace
     - run: |
-      [[ ${{ steps.coverage.outputs.cov-threshold-single-fail}} ]] && \
+      [[ ${{ steps.coverage.outputs.cov-threshold-single-fail == 'true'}} ]] && \
       echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-single-fail }}" && \
       exit 1
       shell: bash
     - run: |
-        [[ ${{ steps.coverage.outputs.cov-threshold-total-fail}} ]] && \
+        [[ ${{ steps.coverage.outputs.cov-threshold-total-fail == 'true'}} ]] && \
         echo "cov total fail ${{ steps.coverage.outputs.cov-threshold-total-fail }}" && \
         exit 1
       shell: bash
