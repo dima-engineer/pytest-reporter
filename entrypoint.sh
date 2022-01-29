@@ -2,15 +2,15 @@
 
 # $1: package-manager
 # $2: requirements file if pip is a package-manager
-# $4: pytest-root-dir
-# $5: tests dir
-# $6: cov-omit-list
-# $7: cov-threshold-single
-# $8: cov-threshold-total
+# $3: pytest-root-dir
+# $4: tests dir
+# $5: cov-omit-list
+# $6: cov-threshold-single
+# $7: cov-threshold-total
 
 PACKAGE_MANAGER=${1:-"pip"}
 
-# Case insensitive comparing
+# Case insensitive comparing and installing of package-manager
 case ${PACKAGE_MANAGER,,} in
 "poetry")
   python -m pip install 'poetry==1.1.11'
@@ -24,5 +24,22 @@ case ${PACKAGE_MANAGER,,} in
   then
     python -m pip install -r "$2" --no-cache-dir --user
   fi
-  python -m pip install pytest pytest-cov
+  python -m pip install pytest pytest-cov pytest-mock
 esac
+
+
+COV_CONFIG_FILE=.coveragerc
+COV_THRESHOLD_SINGLE_FAIL=false
+COV_THRESHOLD_TOTAL_FAIL=false
+
+
+# write omit str list to coverage file
+cat << EOF > "$COV_CONFIG_FILE"
+[run]
+omit = $5
+EOF
+
+# Run pytest
+output=$(pytest --cov="$3" --cov-config=.coveragerc "$4")
+echo "Output is:"
+echo "$output"
