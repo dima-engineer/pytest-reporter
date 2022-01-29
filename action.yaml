@@ -16,7 +16,7 @@ inputs:
   pytest-tests-dir:
     description: 'directory with pytest tests. if left empty will identify test(s) dir by default'
     required: false
-    default: ''
+    default: './'
   cov-omit-list:
     description: 'list of directories and/or files to ignore'
     required: false
