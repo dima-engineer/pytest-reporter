@@ -65,4 +65,4 @@ runs:
       shell: bash
     - uses: peter-evans/commit-comment@v1
       with:
-        body: ${{ steps.coverage.outputs.output-table }}
+        body: ${{ steps.run-tests.outputs.output-table }}
