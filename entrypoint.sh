@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 # $1: package-manager
 # $2: requirements file if pip is a package-manager
