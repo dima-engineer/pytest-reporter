@@ -55,10 +55,10 @@ runs:
       shell: bash
     - id: check-threashold
       run: |
-        if [ -z "${{ steps.run-tests.outputs.cov-threshold-single-fail }}" ]; then
+        if [ "${{ steps.run-tests.outputs.cov-threshold-single-fail }}" == "true" ]; then
           echo "cov single fail ${{ steps.run-tests.outputs.cov-threshold-single-fail }}";
           exit 1;
-        elif [ -z "${{ steps.run-tests.outputs.cov-threshold-total-fail }}" ]; then
+        elif [ "${{ steps.run-tests.outputs.cov-threshold-total-fail }}"  == "true" ]; then
           echo "cov single fail ${{ steps.run-tests.outputs.cov-threshold-total-fail }}";
           exit 1;
         fi
