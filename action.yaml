@@ -73,14 +73,14 @@ runs:
     - run: |
       if echo ${{ steps.coverage.outputs.cov-threshold-single-fail }} | grep -c "true"
       then
-        echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-single-fail }}" && \
+        echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-single-fail }}"
         exit 1
       fi
       shell: bash
     - run: |
         if echo ${{ steps.coverage.outputs.cov-threshold-total-fail }} | grep -c "true"
         then
-          echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-total-fail }}" && \
+          echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-total-fail }}"
           exit 1
         fi
       shell: bash
