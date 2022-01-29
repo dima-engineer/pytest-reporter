@@ -8,9 +8,6 @@
 # $6: cov-threshold-single
 # $7: cov-threshold-total
 
-ls
-echo "$(pwd)"
-
 PACKAGE_MANAGER=${1:-"pip"}
 
 # Case insensitive comparing and installing of package-manager
@@ -19,7 +16,7 @@ case ${PACKAGE_MANAGER,,} in
   python -m pip install 'poetry==1.1.11'
   python -m poetry config virtualenvs.create false
   python -m poetry install
-  python -m poetry add pytest pytest-cov pytest-mock
+  python -m poetry add pytest pytest-mock coverage
   python -m poetry shell
   ;;
 "pip")
@@ -27,7 +24,7 @@ case ${PACKAGE_MANAGER,,} in
   then
     python -m pip install -r "$2" --no-cache-dir --user
   fi
-  python -m pip install pytest pytest-cov pytest-mock
+  python -m pip install pytest pytest-mock coverage
 esac
 
 
@@ -43,6 +40,20 @@ omit = $5
 EOF
 
 # Run pytest
-output=$(pytest --cov="$3" --cov-config=.coveragerc "$4")
+output=$(coverage run pytest --rcfile=.coveragerc "$4")
 echo "Output is:"
 echo "$output"
+
+
+coverage json -o coverage.json
+
+TABLE=$(python coverage_processor.py)
+
+echo "$TABLE"
+
+# remove pytest-coverage config file
+if [ -f "$COV_CONFIG_FILE" ]; then
+   rm $COV_CONFIG_FILE
+fi
+
+
