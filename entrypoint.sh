@@ -44,10 +44,11 @@ omit = $5
 EOF
 
 # Run pytest
-OUTPUT=$(coverage run --rcfile=.coveragerc  -m pytest "$4")
+coverage run --rcfile=.coveragerc  -m pytest "$4"
 
 if [ $? == 1 ]
 then
+  echo "Unit tests failed"
   exit 1
 fi
 
