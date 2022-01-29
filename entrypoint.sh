@@ -8,9 +8,16 @@
 # $6: cov-threshold-single
 # $7: cov-threshold-total
 
-ls
+
 
 PACKAGE_MANAGER=${1:-"pip"}
+
+COV_CONFIG_FILE=.coveragerc
+
+
+COV_THRESHOLD_SINGLE_FAIL=false
+COV_THRESHOLD_TOTAL_FAIL=false
+
 
 # Case insensitive comparing and installing of package-manager
 case ${PACKAGE_MANAGER,,} in
@@ -30,11 +37,6 @@ case ${PACKAGE_MANAGER,,} in
 esac
 
 
-COV_CONFIG_FILE=.coveragerc
-COV_THRESHOLD_SINGLE_FAIL=false
-COV_THRESHOLD_TOTAL_FAIL=false
-
-
 # write omit str list to coverage file
 cat << EOF > "$COV_CONFIG_FILE"
 [run]
@@ -42,20 +44,28 @@ omit = $5
 EOF
 
 # Run pytest
-output=$(coverage run --rcfile=.coveragerc  -m pytest "$4")
-echo "Output is:"
-echo "$output"
+OUTPUT=$(coverage run --rcfile=.coveragerc  -m pytest "$4")
 
 
 coverage json -o coverage.json
 
+export COVERAGE_SINGLE_THRESHOLD="$6"
+export COVERAGE_TOTAL_THRESHOLD="$7"
+
 TABLE=$(python coverage_processor.py)
 
-echo "$TABLE"
-
-# remove pytest-coverage config file
-if [ -f "$COV_CONFIG_FILE" ]; then
-   rm $COV_CONFIG_FILE
+if [ $? == 1 ]
+then
+  COV_THRESHOLD_SINGLE_FAIL=true
+elif [ $? == 2 ]
+then
+  COV_THRESHOLD_TOTAL_FAIL=true
 fi
+
+
+# set output variables to be used in workflow file
+echo "::set-output name=output-table::$TABLE"
+echo "::set-output name=cov-threshold-single-fail::$COV_THRESHOLD_SINGLE_FAIL"
+echo "::set-output name=cov-threshold-total-fail::$COV_THRESHOLD_TOTAL_FAIL"
 
 
