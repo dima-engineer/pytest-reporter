@@ -55,13 +55,13 @@ runs:
       shell: bash
     - id: check-threashold
       run: |
-      if [ -z "${{ steps.coverage.outputs.cov-threshold-single-fail }}" ]; then
-        echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-single-fail }}"
-        exit 1
-      elif [ -z "${{ steps.coverage.outputs.cov-threshold-total-fail }}" ]; then
-        echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-total-fail }}"
-        exit 1
-      fi
+        if [ -z "${{ steps.coverage.outputs.cov-threshold-single-fail }}" ]; then
+          echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-single-fail }}";
+          exit 1;
+        elif [ -z "${{ steps.coverage.outputs.cov-threshold-total-fail }}" ]; then
+          echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-total-fail }}";
+          exit 1;
+        fi
       shell: bash
     - uses: peter-evans/commit-comment@v1
       with:
