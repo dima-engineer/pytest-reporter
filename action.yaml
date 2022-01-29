@@ -52,39 +52,34 @@ runs:
         ${{ inputs.cov-threshold-total }} \
       id: coverage
       shell: bash
-    - uses: peter-evans/find-comment@v1
-      if: ${{ github.event_name == "pull_request" }}
-      id: fc
-      with:
-        issue-number: ${{ github.event.pull_request.number }}
-        comment-author: 'github-actions[bot]'
-        direction: last
-    - run: echo "SHORT_SHA=`echo ${{github.event.after}} | cut -c1-7`" >> $GITHUB_ENV
-      if: ${{ github.event_name == "pull_request" }}
-      shell: bash
-    - run: echo "COMMIT_URL=`echo https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/commits/${{ github.event.after }}`"
-      if: ${{ github.event_name == "pull_request" }}
-      shell: bash
-    - uses: peter-evans/create-or-update-comment@v1
-      if: ${{ github.event_name == "pull_request" }}
-      with:
-        issue-number: ${{ github.event.pull_request.number }}
-        comment-id: ${{ steps.fc.outputs.comment-id }}
-        body: |
-          ## Tests coverage table for [${{ env.SHORT_SHA }}](${{ env.COMMIT_URL }}) commit.
-          ${{ steps.pytester-cov.outputs.output-table }}
-        edit-mode: replace
+#    - uses: peter-evans/find-comment@v1
+#      id: fc
+#      with:
+#        issue-number: ${{ github.event.pull_request.number }}
+#        comment-author: 'github-actions[bot]'
+#        direction: last
+#    - run: echo "SHORT_SHA=`echo ${{github.event.after}} | cut -c1-7`" >> $GITHUB_ENV
+#      shell: bash
+#    - run: echo "COMMIT_URL=`echo https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/commits/${{ github.event.after }}`"
+#      shell: bash
+#    - uses: peter-evans/create-or-update-comment@v1
+#      with:
+#        issue-number: ${{ github.event.pull_request.number }}
+#        comment-id: ${{ steps.fc.outputs.comment-id }}
+#        body: |
+#          ## Tests coverage table for [${{ env.SHORT_SHA }}](${{ env.COMMIT_URL }}) commit.
+#          ${{ steps.pytester-cov.outputs.output-table }}
+#        edit-mode: replace
     - run: |
-      echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-single-fail }}"
+      [[ ${{ steps.coverage.outputs.cov-threshold-single-fail}} ]] && \
+      echo "cov single fail ${{ steps.coverage.outputs.cov-threshold-single-fail }}" && \
       exit 1
       shell: bash
-      if: ${{ steps.coverage.outputs.cov-threshold-single-fail == 'true' }}
     - run: |
-        echo "cov total fail ${{ steps.coverage.outputs.cov-threshold-total-fail }}"
+        [[ ${{ steps.coverage.outputs.cov-threshold-total-fail}} ]] && \
+        echo "cov total fail ${{ steps.coverage.outputs.cov-threshold-total-fail }}" && \
         exit 1
       shell: bash
-      if: ${{ steps.coverage.outputs.cov-threshold-total-fail == 'true' }}
     - uses: peter-evans/commit-comment@v1
-      if: ${{ github.event_name != "pull_request" }}
       with:
         body: ${{ steps.coverage.outputs.output-table }}
