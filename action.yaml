@@ -41,13 +41,13 @@ runs:
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
-    - run: /
-        ${{ github.action_path }}/entrypoint.sh /
-        ${{ inputs.package-manager }} /
-        ${{ inputs.requirements-file }} /
-        ${{ inputs.pytest-root-dir }} /
-        ${{ inputs.pytest-tests-dir }} /
-        ${{ inputs.cov-omit-list }} /
-        ${{ inputs.cov-threshold-single }} /
-        ${{ inputs.cov-threshold-total }} /
+    - run: \
+        ${{ github.action_path }}/entrypoint.sh \
+        ${{ inputs.package-manager }} \
+        ${{ inputs.requirements-file }} \
+        ${{ inputs.pytest-root-dir }} \
+        ${{ inputs.pytest-tests-dir }} \
+        ${{ inputs.cov-omit-list }} \
+        ${{ inputs.cov-threshold-single }} \
+        ${{ inputs.cov-threshold-total }} \
       shell: bash
