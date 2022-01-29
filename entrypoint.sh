@@ -8,6 +8,8 @@
 # $6: cov-threshold-single
 # $7: cov-threshold-total
 
+ls
+
 PACKAGE_MANAGER=${1:-"pip"}
 
 # Case insensitive comparing and installing of package-manager
