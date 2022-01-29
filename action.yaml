@@ -36,10 +36,7 @@ outputs:
 runs:
   using: "composite"
   steps:
-    - run: echo Hello ${{ inputs.who-to-greet }}.
-      shell: bash
-    - id: random-number-generator
-      run: echo "::set-output name=random-id::$(echo $RANDOM)"
+    - run: cp ${{ github.action_path }}/coverage_processor.py .
       shell: bash
     - run: |
         ${{ github.action_path }}/entrypoint.sh \
