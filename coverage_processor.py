@@ -14,6 +14,22 @@ coverage_file = Path(COVERAGE_FILE_PATH)
 with coverage_file.open('r') as file:
     data = json.load(file)
 output = list()
+
+
+total_coverage = round(data["totals"]["percent_covered"], 2)
+color = 'red'
+
+if 50 >= total_coverage > 20:
+    color = "orange"
+elif 70 >= total_coverage > 50:
+    color = "yellow"
+elif 90 >= total_coverage > 70:
+    color = "green"
+elif 100 >= total_coverage > 90:
+    color = "brightgreen"
+
+
+output.append(f'![pytest-coverage-badge](https://img.shields.io/static/v1?label=pytest-coverage🛡️&message={total_coverage}%&color={color})')
 output.append('|Name|Stmts|Miss|Cover|')
 output.append('| ------ | ------ | ------ | ------ |')
 
@@ -31,7 +47,9 @@ for file_path, file_data in data.get('files', dict()).items():
 
 totals = data["totals"]
 
-output.append(f'|TOTAL|{totals["num_statements"]}|{totals["missing_lines"]}|{round(totals["percent_covered"], 2)}%25|')
+
+output.append(f'|TOTAL|{totals["num_statements"]}|{totals["missing_lines"]}|{total_coverage}%25|')
+
 
 print(*output, sep="%0A")
 
