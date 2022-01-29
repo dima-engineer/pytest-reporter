@@ -1,10 +1,34 @@
 name: 'Hello World'
 description: 'Greet someone'
 inputs:
-  who-to-greet:  # id of input
-    description: 'Who to greet'
-    required: true
-    default: 'World'
+  package-manager:
+    description: 'Python package manager. Pip is default'
+    required: false
+    default: 'pip'
+  requirements-file:
+    description: 'Path to the requirements file if you use pip. ./requirements.txt by default'
+    required: false
+    default: './requirements.txt'
+  pytest-root-dir:
+    description: 'root directory to recursively search for .py files'
+    required: false
+    default: '.'
+  pytest-tests-dir:
+    description: 'directory with pytest tests. if left empty will identify test(s) dir by default'
+    required: false
+    default: ''
+  cov-omit-list:
+    description: 'list of directories and/or files to ignore'
+    required: false
+    default: ''
+  cov-threshold-single:
+    description: 'fail if any single file coverage is less than threshold'
+    required: false
+    default: 0
+  cov-threshold-total:
+    description: 'fail if the total coverage is less than threshold'
+    required: false
+    default: 0
 outputs:
   random-number:
     description: "Random number"
@@ -17,5 +41,13 @@ runs:
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
-    - run: ${{ github.action_path }}/entrypoint.sh
+    - run: /
+        ${{ github.action_path }}/entrypoint.sh /
+        ${{ inputs.package-manager }} /
+        ${{ inputs.requirements-file }} /
+        ${{ inputs.pytest-root-dir }} /
+        ${{ inputs.pytest-tests-dir }} /
+        ${{ inputs.cov-omit-list }} /
+        ${{ inputs.cov-threshold-single }} /
+        ${{ inputs.cov-threshold-total }} /
       shell: bash
