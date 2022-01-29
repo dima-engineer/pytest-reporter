@@ -40,7 +40,7 @@ omit = $5
 EOF
 
 # Run pytest
-output=$(coverage run pytest --rcfile=.coveragerc "$4")
+output=$(coverage run --rcfile=.coveragerc  -m pytest "$4")
 echo "Output is:"
 echo "$output"
 
