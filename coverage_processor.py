@@ -29,7 +29,7 @@ elif 100 >= total_coverage > 90:
     color = "brightgreen"
 
 
-output.append(f'![pytest-coverage-badge](https://img.shields.io/static/v1?label=pytest-coverage🛡️&message={total_coverage}%&color={color})')
+output.append(f'![pytest-reporter-badge](https://img.shields.io/static/v1?label=pytest-reporter🛡️&message={total_coverage}%&color={color})')
 output.append('|Name|Stmts|Miss|Cover|')
 output.append('| ------ | ------ | ------ | ------ |')
 
