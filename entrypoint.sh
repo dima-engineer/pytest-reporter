@@ -37,8 +37,9 @@ case ${PACKAGE_MANAGER,,} in
   ;;
 "pipenv")
   python -m pip install pipenv
+  python pipenv shell
   pipenv install --dev
-  pipenv install pytest pytest-mock coverage
+  pipenv install --dev pytest pytest-mock coverage
 esac
 
 
