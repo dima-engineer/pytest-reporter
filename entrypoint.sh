@@ -11,7 +11,7 @@
 
 
 PACKAGE_MANAGER=${1:-"pip"}
-RUN_COMMAND="python -m"
+#RUN_COMMAND="python -m"
 
 COV_CONFIG_FILE=.coveragerc
 
@@ -38,9 +38,9 @@ case ${PACKAGE_MANAGER,,} in
   ;;
 "pipenv")
   python -m pip install pipenv
-  PYTHON_COMMAND="pipenv run"
-  pipenv install --dev
-  pipenv install --dev pytest pytest-mock coverage
+#  PYTHON_COMMAND="pipenv run"
+  pipenv install --dev --system
+  pipenv install --dev --system pytest pytest-mock coverage
 esac
 
 
@@ -51,7 +51,7 @@ omit = $5
 EOF
 
 # Run pytest
-$PYTHON_COMMAND coverage run --rcfile=.coveragerc  -m pytest "$4"
+coverage run --rcfile=.coveragerc  -m pytest "$4"
 
 if [ $? == 1 ]
 then
@@ -59,7 +59,7 @@ then
   exit 1
 fi
 
-$PYTHON_COMMAND coverage json -o coverage.json
+coverage json -o coverage.json
 
 export COVERAGE_SINGLE_THRESHOLD="$6"
 export COVERAGE_TOTAL_THRESHOLD="$7"
