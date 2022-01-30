@@ -40,6 +40,10 @@ case ${PACKAGE_MANAGER,,} in
   pipenv install --dev pytest pytest-mock coverage
   pipenv install --dev --system
   pipenv --rm
+  ;;
+"*")
+  echo "$PACKAGE_MANAGER is not supported by this GitHub action as a python package manager :("
+  exit 1
 esac
 
 
