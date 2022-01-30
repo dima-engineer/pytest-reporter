@@ -11,7 +11,6 @@
 
 
 PACKAGE_MANAGER=${1:-"pip"}
-#RUN_COMMAND="python -m"
 
 COV_CONFIG_FILE=.coveragerc
 
@@ -38,9 +37,8 @@ case ${PACKAGE_MANAGER,,} in
   ;;
 "pipenv")
   python -m pip install pipenv
-#  PYTHON_COMMAND="pipenv run"
   pipenv install --dev --system
-  pipenv install --dev --system pytest pytest-mock coverage
+  pipenv install --dev pytest pytest-mock coverage
 esac
 
 
