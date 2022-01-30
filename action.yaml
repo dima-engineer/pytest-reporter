@@ -1,5 +1,10 @@
 name: 'pytest-reporter'
-description: 'Pytest GitHub coverage reporter'
+author: Dmitry Marchuk
+description: >-
+  Check pytest coverage and fail if tests failed or file and/or total coverage below threshold.
+branding:
+  color: 'purple'
+  icon: 'check-square'
 inputs:
   package-manager:
     description: 'Python package manager. Pip is default'
