@@ -67,7 +67,7 @@ jobs:
         with:
           python-version: '3.9.6' # Define necassary python version
       - id: run-tests
-        uses: dima-engineer/pytest-reporter@v1.0
+        uses: dima-engineer/pytest-reporter@v1.0.0
         with:
           package-manager: poetry
           cov-omit-list: tests/*
