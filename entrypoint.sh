@@ -59,7 +59,7 @@ coverage json -o coverage.json
 export COVERAGE_SINGLE_THRESHOLD="$5"
 export COVERAGE_TOTAL_THRESHOLD="$6"
 
-TABLE=$(python coverage_processor.py)
+TABLE=$(python coverage_handler.py)
 
 COVERAGE_STATUS_CODE=$?
 
