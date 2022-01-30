@@ -34,6 +34,11 @@ case ${PACKAGE_MANAGER,,} in
     python -m pip install -r "$2" --no-cache-dir --user
   fi
   python -m pip install pytest pytest-mock coverage
+  ;;
+"pipenv")
+  python -m pip install pipenv
+  pipenv install --dev
+  pipenv install pytest pytest-mock coverage
 esac
 
 

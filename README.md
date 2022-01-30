@@ -15,7 +15,7 @@ This GitHub action runs python tests using `pytest` and creates a comment for PR
 - `package-manager`
   - Python package manager you use in your project
   - `pip` by default
-  - Can be `pip`, `poetry`
+  - Can be `pip`, `poetry`, `pipenv`
 
 - `requirements-file`
   - requirements filepath for project
@@ -67,7 +67,7 @@ jobs:
         with:
           python-version: '3.9.6' # Define necassary python version
       - id: run-tests
-        uses: dima-engineer/pytest-reporter@v1.0.0
+        uses: dima-engineer/pytest-reporter@v1.0.1
         with:
           package-manager: poetry
           cov-omit-list: tests/*
