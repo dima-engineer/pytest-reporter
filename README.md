@@ -14,7 +14,8 @@ This GitHub action runs python tests using `pytest` and creates a comment for PR
 
 - `package-manager`
   - Python package manager you use in your project
-  - `pip` by default 
+  - `pip` by default
+  - Can be `pip`, `poetry`
 
 - `requirements-file`
   - requirements filepath for project
