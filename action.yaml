@@ -6,10 +6,6 @@ branding:
   color: 'purple'
   icon: 'check-square'
 inputs:
-  package-manager:
-    description: 'Python package manager. Pip is default'
-    required: false
-    default: 'pip'
   requirements-file:
     description: 'Path to the requirements file if you use pip. ./requirements.txt by default'
     required: false
@@ -50,7 +46,6 @@ runs:
     - id: run-tests
       run: |
         ${{ github.action_path }}/entrypoint.sh \
-        "${{ inputs.package-manager }}" \
         "${{ inputs.requirements-file }}" \
         "${{ inputs.pytest-root-dir }}" \
         "${{ inputs.pytest-tests-dir }}" \

@@ -1,6 +1,7 @@
 # pytest-reporter
 
-This GitHub action runs python tests using `pytest` and creates a comment for PR with a coverage table.  
+This GitHub action runs python tests using `pytest` and creates a comment for PR with a coverage table.
+It supports projects with the most popular python package managers (`pip`, `poetry`, `pipenv`)
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org)
 
@@ -10,12 +11,6 @@ This GitHub action runs python tests using `pytest` and creates a comment for PR
 - [`coverage`](https://pypi.org/project/coverage/)
 
 ## Optional Inputs
-
-
-- `package-manager`
-  - Python package manager you use in your project
-  - `pip` by default
-  - Can be `pip`, `poetry`, `pipenv`
 
 - `requirements-file`
   - requirements filepath for project
@@ -53,7 +48,7 @@ This GitHub action runs python tests using `pytest` and creates a comment for PR
 ## Template workflow file
 
 ```yaml
-name: pytester-cov workflow
+name: pytest-reporter workflow
 
 on: [pull_request]
 
@@ -69,7 +64,6 @@ jobs:
       - id: run-tests
         uses: dima-engineer/pytest-reporter@v1.0.1
         with:
-          package-manager: poetry
           cov-omit-list: tests/*
           cov-threshold-single: 85
           cov-threshold-total: 90
