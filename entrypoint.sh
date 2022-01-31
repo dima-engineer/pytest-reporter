@@ -42,7 +42,7 @@ fi
 # write omit str list to coverage file
 cat << EOF > "$COV_CONFIG_FILE"
 [run]
-omit = "$4 coverage_handler.py"
+omit = "$4 ./coverage_handler.py"
 EOF
 
 # Run pytest
