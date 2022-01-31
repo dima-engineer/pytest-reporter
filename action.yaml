@@ -53,16 +53,6 @@ runs:
         ${{ inputs.cov-threshold-single }} \
         ${{ inputs.cov-threshold-total }} \
       shell: bash
-    - id: check-threashold
-      run: |
-        if [ "${{ steps.run-tests.outputs.cov-threshold-single-fail }}" == "true" ]; then
-          echo "cov single fail ${{ steps.run-tests.outputs.cov-threshold-single-fail }}";
-          exit 1;
-        elif [ "${{ steps.run-tests.outputs.cov-threshold-total-fail }}"  == "true" ]; then
-          echo "cov single fail ${{ steps.run-tests.outputs.cov-threshold-total-fail }}";
-          exit 1;
-        fi
-      shell: bash
     - run: |
         echo "SHORT_SHA=`echo ${{github.event.after}} | cut -c1-7`" >> $GITHUB_ENV
         echo "PULL_NUMBER=`echo ${{ github.event.pull_request.number }}`" >> $GITHUB_ENV
@@ -82,3 +72,13 @@ runs:
           ## Tests coverage table for [${{ env.SHORT_SHA }}](${{ env.COMMIT_URL }}) commit.
           ${{ steps.run-tests.outputs.output-table }}
         edit-mode: replace
+    - id: check-threashold
+      run: |
+        if [ "${{ steps.run-tests.outputs.cov-threshold-single-fail }}" == "true" ]; then
+          echo "cov single fail ${{ steps.run-tests.outputs.cov-threshold-single-fail }}";
+          exit 1;
+        elif [ "${{ steps.run-tests.outputs.cov-threshold-total-fail }}"  == "true" ]; then
+          echo "cov single fail ${{ steps.run-tests.outputs.cov-threshold-total-fail }}";
+          exit 1;
+        fi
+      shell: bash
