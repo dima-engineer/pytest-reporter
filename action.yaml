@@ -58,20 +58,10 @@ runs:
         echo "PULL_NUMBER=`echo ${{ github.event.pull_request.number }}`" >> $GITHUB_ENV
         echo "COMMIT_URL=`echo https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/commits/${{ github.event.after }}`" >> $GITHUB_ENV
       shell: bash
-    - uses: peter-evans/find-comment@v1
-      id: fc
+    - name: Commit pytest coverage table
+      uses: peter-evans/commit-comment@v1
       with:
-        issue-number: ${{ github.event.pull_request.number }}
-        comment-author: 'github-actions[bot]'
-        direction: last
-    - uses: peter-evans/create-or-update-comment@v1
-      with:
-        issue-number: ${{env.PULL_NUMBER}}
-        comment-id: ${{ steps.fc.outputs.comment-id }}
-        body: |
-          ## Tests coverage table for [${{ env.SHORT_SHA }}](${{ env.COMMIT_URL }}) commit.
-          ${{ steps.run-tests.outputs.output-table }}
-        edit-mode: replace
+        body: ${{ steps.pytester-cov.outputs.output-table }}
     - id: check-threashold
       run: |
         if [ "${{ steps.run-tests.outputs.cov-threshold-single-fail }}" == "true" ]; then
