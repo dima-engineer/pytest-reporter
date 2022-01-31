@@ -41,7 +41,7 @@ runs:
   using: "composite"
   steps:
     - id: copy-coverage-processor
-      run: cp ${{ github.action_path }}/coverage_handler.py .
+      run: cp ${{ github.action_path }}/coverage_handler.py ./coverage_handler
       shell: bash
     - id: run-tests
       run: |

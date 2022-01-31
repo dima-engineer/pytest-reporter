@@ -42,7 +42,7 @@ fi
 # write omit str list to coverage file
 cat << EOF > "$COV_CONFIG_FILE"
 [run]
-omit = "$4, coverage_handler.py"
+omit = $4
 EOF
 
 # Run pytest
@@ -59,7 +59,7 @@ coverage json -o coverage.json
 export COVERAGE_SINGLE_THRESHOLD="$5"
 export COVERAGE_TOTAL_THRESHOLD="$6"
 
-TABLE=$(python coverage_handler.py)
+TABLE=$(python coverage_handler)
 
 COVERAGE_STATUS_CODE=$?
 
