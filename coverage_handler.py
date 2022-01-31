@@ -57,6 +57,6 @@ if round(totals["percent_covered"], 2) < COVERAGE_TOTAL_THRESHOLD:
     COV_THRESHOLD_TOTAL_FAIL = True
 
 if COV_THRESHOLD_SINGLE_FAIL:
-    sys.exit(1)
+    sys.exit(101)
 if COV_THRESHOLD_TOTAL_FAIL:
-    sys.exit(2)
+    sys.exit(102)

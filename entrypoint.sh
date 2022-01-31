@@ -63,12 +63,16 @@ TABLE=$(python coverage_handler)
 
 COVERAGE_STATUS_CODE=$?
 
-if [ $COVERAGE_STATUS_CODE == 1 ]
+if [ $COVERAGE_STATUS_CODE == 101 ]
 then
   COV_THRESHOLD_SINGLE_FAIL=true
-elif [ $COVERAGE_STATUS_CODE == 2 ]
+elif [ $COVERAGE_STATUS_CODE == 102 ]
 then
   COV_THRESHOLD_TOTAL_FAIL=true
+elif [ $COVERAGE_STATUS_CODE != 0 ];
+then
+    echo "Something went wrong!"
+    exit 1
 fi
 
 
