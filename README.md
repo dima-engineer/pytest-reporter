@@ -32,19 +32,7 @@ It supports projects with the most popular python package managers (`pip`, `poet
 
 - `cov-threshold-total`
   - fail if the total coverage is less than threshold
-
-## Outputs
-
-- `output-table`
-  - str
-  - `pytest --cov` markdown output table
-- `cov-threshold-single-fail`
-  - boolean
-  - `false` if any single file coverage less than `cov-threshold-single`, else `true`
-- `cov-threshold-total-fail`
-  - boolean
-  - `false` if total coverage less than `cov-threshold-total`, else `true`
-
+  
 ## Template workflow file
 
 ```yaml
@@ -60,7 +48,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.9.6' # Define necassary python version
+          python-version: '3.9.6' # Define your project python version
       - id: run-tests
         uses: dima-engineer/pytest-reporter@v1.0.1
         with:

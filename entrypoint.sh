@@ -46,7 +46,7 @@ omit = $4
 EOF
 
 # Run pytest
-coverage run --rcfile=.coveragerc  -m pytest "$3"
+coverage run --source="$2" --rcfile=.coveragerc  -m pytest "$3"
 
 if [ $? == 1 ]
 then
