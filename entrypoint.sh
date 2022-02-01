@@ -20,7 +20,7 @@ apt install -y mysql-client
 # Case insensitive comparing and installing of package-manager
 if [ -f "./pyproject.toml" ] && [ -f "./poetry.lock" ]
 then
-  python -m pip install 'poetry==1.1.11'
+  python -m pip install 'poetry==1.1.12'
   python -m poetry config virtualenvs.create false
   python -m poetry install
   python -m poetry add pytest pytest-mock coverage
