@@ -14,6 +14,8 @@ COV_CONFIG_FILE=.coveragerc
 COV_THRESHOLD_SINGLE_FAIL=false
 COV_THRESHOLD_TOTAL_FAIL=false
 
+apt-get install libmysqlclient-dev
+apt-get install libssl-dev
 
 # Case insensitive comparing and installing of package-manager
 if [ -f "./pyproject.toml" ] && [ -f "./poetry.lock" ]
