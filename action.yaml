@@ -61,7 +61,7 @@ runs:
     - name: Commit pytest coverage table
       uses: peter-evans/commit-comment@v1
       with:
-        body: ${{ steps.pytester-cov.outputs.output-table }}
+        body: ${{ steps.run-tests.outputs.output-table }}
     - id: check-threashold
       run: |
         if [ "${{ steps.run-tests.outputs.cov-threshold-single-fail }}" == "true" ]; then
