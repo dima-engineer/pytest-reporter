@@ -18,7 +18,7 @@ COV_THRESHOLD_TOTAL_FAIL=false
 # Case insensitive comparing and installing of package-manager
 if [ -f "./pyproject.toml" ] && [ -f "./poetry.lock" ]
 then
-  python -m pip install 'poetry==1.1.11'
+  python -m pip install poetry
   python -m poetry config virtualenvs.create false
   python -m poetry install
   python -m poetry add pytest pytest-mock coverage
