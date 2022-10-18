@@ -6,6 +6,7 @@
 # $4: cov-omit-list
 # $5: cov-threshold-single
 # $6: cov-threshold-total
+# $7: async-tests
 
 
 COV_CONFIG_FILE=.coveragerc
@@ -23,17 +24,29 @@ then
   python -m poetry config virtualenvs.create false
   python -m poetry install
   python -m poetry add pytest pytest-mock coverage
+  if [ $7 == true ]
+  then
+    python -m poetry install pytest-asyncio
+  fi
   python -m poetry shell
 elif [ -f "./Pipfile" ] && [ -f "./Pipfile.lock" ];
 then
   python -m pip install pipenv
   pipenv install --dev pytest pytest-mock coverage
+  if [ $7 == true ]
+  then
+    pipenv install --dev pytest-asyncio
+  fi
   pipenv install --dev --system
   pipenv --rm
 elif [ -f "$1" ];
 then
   python -m pip install -r "$1" --no-cache-dir --user
   python -m pip install pytest pytest-mock coverage
+  if [ $7 == true ]
+  then
+	python -m pip install pytest-asyncio
+  fi
 else
   echo "Can not detect your package manager :("
   exit 1
