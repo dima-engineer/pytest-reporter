@@ -32,6 +32,9 @@ It supports projects with the most popular python package managers (`pip`, `poet
 
 - `cov-threshold-total`
   - fail if the total coverage is less than threshold
+
+- `async-tests`
+  - Add support for async tests
   
 ## Template workflow file
 
@@ -55,3 +58,4 @@ jobs:
           cov-omit-list: tests/*
           cov-threshold-single: 85
           cov-threshold-total: 90
+          async-tests: true
