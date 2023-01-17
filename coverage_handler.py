@@ -51,7 +51,7 @@ totals = data["totals"]
 output.append(f'|TOTAL|{totals["num_statements"]}|{totals["missing_lines"]}|{total_coverage}%25|')
 
 
-print(*output, sep="%0A")
+print(*output, sep="\n")
 
 if round(totals["percent_covered"], 2) < COVERAGE_TOTAL_THRESHOLD:
     COV_THRESHOLD_TOTAL_FAIL = True
