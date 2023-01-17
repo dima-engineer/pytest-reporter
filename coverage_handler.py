@@ -42,13 +42,13 @@ for file_path, file_data in data.get('files', dict()).items():
     if percent_covered < COVERAGE_SINGLE_THRESHOLD:
         COV_THRESHOLD_SINGLE_FAIL = True
     output.append(
-        f'|{file_path}|{num_statements}|{missing_lines}|{percent_covered}%25|'
+        f'|{file_path}|{num_statements}|{missing_lines}|{percent_covered}%|'
     )
 
 totals = data["totals"]
 
 
-output.append(f'|TOTAL|{totals["num_statements"]}|{totals["missing_lines"]}|{total_coverage}%25|')
+output.append(f'|TOTAL|{totals["num_statements"]}|{totals["missing_lines"]}|{total_coverage}%|')
 
 
 print(*output, sep="\n")
