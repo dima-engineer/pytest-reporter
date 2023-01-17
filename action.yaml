@@ -63,7 +63,24 @@ runs:
         echo "PULL_NUMBER=`echo ${{ github.event.pull_request.number }}`" >> $GITHUB_ENV
         echo "COMMIT_URL=`echo https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/commits/${{ github.event.after }}`" >> $GITHUB_ENV
       shell: bash
+    - uses: peter-evans/find-comment@v1
+      if: ${{ env.PULL_NUMBER }}
+      id: fc
+      with:
+        issue-number: ${{ github.event.pull_request.number }}
+        comment-author: 'github-actions[bot]'
+        direction: last
+    - uses: peter-evans/create-or-update-comment@v1
+      if: ${{ env.PULL_NUMBER }}
+      with:
+        issue-number: ${{env.PULL_NUMBER}}
+        comment-id: ${{ steps.fc.outputs.comment-id }}
+        body: |
+          ## Tests coverage table for [${{ env.SHORT_SHA }}](${{ env.COMMIT_URL }}) commit.
+          ${{ steps.run-tests.outputs.output-table }}
+        edit-mode: replace
     - name: Commit pytest coverage table
+      if: ${{ !env.PULL_NUMBER }}
       uses: peter-evans/commit-comment@v1
       with:
         body: ${{ steps.run-tests.outputs.output-table }}
