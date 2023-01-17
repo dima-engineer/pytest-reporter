@@ -84,6 +84,6 @@ fi
 
 
 # set output variables to be used in workflow file
-echo "::set-output name=output-table::$TABLE"
-echo "::set-output name=cov-threshold-single-fail::$COV_THRESHOLD_SINGLE_FAIL"
-echo "::set-output name=cov-threshold-total-fail::$COV_THRESHOLD_TOTAL_FAIL"
+echo "output-table=$TABLE" >> $GITHUB_OUTPUT
+echo "cov-threshold-single-fail=$COV_THRESHOLD_SINGLE_FAIL" >> $GITHUB_OUTPUT
+echo "cov-threshold-total-fail=$COV_THRESHOLD_TOTAL_FAIL" >> $GITHUB_OUTPUT
