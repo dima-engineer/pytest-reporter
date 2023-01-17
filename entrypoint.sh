@@ -84,7 +84,7 @@ fi
 
 
 # set output variables to be used in workflow file
-echo "output-table=<<EOF" >> $GITHUB_OUTPUT
+echo "output-table<<EOF" >> $GITHUB_OUTPUT
 echo "$TABLE" >> $GITHUB_OUTPUT
 echo "EOF" >> $GITHUB_OUTPUT
 echo "cov-threshold-single-fail=$COV_THRESHOLD_SINGLE_FAIL" >> $GITHUB_OUTPUT
