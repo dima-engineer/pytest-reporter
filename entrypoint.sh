@@ -29,7 +29,7 @@ then
   if [ $poetry_version ]
   then
     echo "Poetry version $poetry_version detected in pyproject.toml"
-    python -m pip install poetry==$POETRY_VERSION
+    python -m pip install poetry==$poetry_version
   else
     echo "Poetry version is not detected. Installing latest version"
     python -m pip install poetry
