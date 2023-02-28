@@ -28,7 +28,7 @@ then
   IFS="="
   while read -r name value
   do
-    if [ $name == 'version' ]
+    if [ "$name" == "version" ]
     then
       POETRY_VERSION=$value
     fi
