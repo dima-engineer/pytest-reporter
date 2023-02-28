@@ -25,7 +25,20 @@ fi
 # Case insensitive comparing and installing of package-manager
 if [ -f "./pyproject.toml" ] && [ -f "./poetry.lock" ]
 then
-  python -m pip install poetry
+  IFS="="
+  while read -r name value
+  do
+    if [ $name == 'version' ]
+    then
+      POETRY_VERSION=$value
+    fi
+  done < ./pyproject.toml
+  if [ $POETRY_VERSION ]
+  then
+    python -m pip install poetry==$POETRY_VERSION
+  else
+    python -m pip install poetry
+  fi
   python -m poetry config virtualenvs.create false
   python -m poetry install
   python -m poetry add $TESTING_TOOLS
