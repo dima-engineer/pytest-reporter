@@ -25,19 +25,13 @@ fi
 # Case insensitive comparing and installing of package-manager
 if [ -f "./pyproject.toml" ] && [ -f "./poetry.lock" ]
 then
-  IFS="="
-  while read -r name value
-  do
-    if [ "$name" == "version" ]
-    then
-      echo "Poetry version detected in pyproject.toml - $value"
-      POETRY_VERSION=$value
-    fi
-  done < ./pyproject.toml
-  if [ $POETRY_VERSION ]
+  poetry_version=$(grep "^version" pyproject.toml | sed 's/.*= *//; s/["'\'']//g')
+  if [ $poetry_version ]
   then
+    echo "Poetry version $poetry_version detected in pyproject.toml"
     python -m pip install poetry==$POETRY_VERSION
   else
+    echo "Poetry version is not detected. Installing latest version"
     python -m pip install poetry
   fi
   python -m poetry config virtualenvs.create false
