@@ -30,6 +30,7 @@ then
   do
     if [ "$name" == "version" ]
     then
+      echo "Poetry version detected in pyproject.toml - $value"
       POETRY_VERSION=$value
     fi
   done < ./pyproject.toml
