@@ -34,6 +34,10 @@ inputs:
     description: 'Add support for async tests'
     required: false
     default: false
+  poetry-version:
+    description: 'Version of poetry. Latest if not specified.'
+    required: false
+
 outputs:
   output-table: # id of output
     description: 'pytest-cov markdown output table'
@@ -57,6 +61,7 @@ runs:
         ${{ inputs.cov-threshold-single }} \
         ${{ inputs.cov-threshold-total }} \
         ${{ inputs.async-tests }} \
+        ${{ inputs.poetry-version }} \
       shell: bash
     - run: |
         echo "SHORT_SHA=`echo ${{github.event.after}} | cut -c1-7`" >> $GITHUB_ENV

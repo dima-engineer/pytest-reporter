@@ -35,6 +35,9 @@ It supports projects with the most popular python package managers (`pip`, `poet
 
 - `async-tests`
   - Add support for async tests
+
+- `poetry-version`
+  - Poetry version to be used. The latest version is used by default
   
 ## Template workflow file
 
@@ -59,3 +62,4 @@ jobs:
           cov-threshold-single: 85
           cov-threshold-total: 90
           async-tests: true
+          poetry-version: 1.4.2

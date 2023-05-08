@@ -7,6 +7,7 @@
 # $5: cov-threshold-single
 # $6: cov-threshold-total
 # $7: async-tests
+# $8: poetry-version
 
 
 COV_CONFIG_FILE=.coveragerc
@@ -25,13 +26,13 @@ fi
 # Case insensitive comparing and installing of package-manager
 if [ -f "./pyproject.toml" ] && [ -f "./poetry.lock" ]
 then
-  poetry_version=$(grep "^version" pyproject.toml | sed 's/.*= *//; s/["'\'']//g')
+  poetry_version=$8
   if [ $poetry_version ]
   then
-    echo "Poetry version $poetry_version detected in pyproject.toml"
+    echo "Poetry version $poetry_version provided"
     python -m pip install poetry==$poetry_version
   else
-    echo "Poetry version is not detected. Installing latest version"
+    echo "Poetry version is not provided. Installing latest version"
     python -m pip install poetry
   fi
   python -m poetry config virtualenvs.create false
