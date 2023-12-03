@@ -8,6 +8,7 @@
 # $6: cov-threshold-total
 # $7: async-tests
 # $8: poetry-version
+# $9: dev-requirements
 
 
 COV_CONFIG_FILE=.coveragerc
@@ -38,6 +39,9 @@ then
   python -m poetry config virtualenvs.create false
   python -m poetry install
   python -m poetry add $TESTING_TOOLS
+  if [ $9 ] then
+    python -m poetry install --extras 'dev'
+  fi
   python -m poetry shell
 elif [ -f "./Pipfile" ] && [ -f "./Pipfile.lock" ];
 then

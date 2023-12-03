@@ -37,6 +37,10 @@ inputs:
   poetry-version:
     description: 'Version of poetry. Latest if not specified.'
     required: false
+  dev-requirements:
+    description: 'boolean if there is an extra for development requirements'
+    required: false
+    default: false
 
 outputs:
   output-table: # id of output
@@ -62,6 +66,7 @@ runs:
         ${{ inputs.cov-threshold-total }} \
         ${{ inputs.async-tests }} \
         ${{ inputs.poetry-version }} \
+        ${{ inputs.dev-requirements }} \
       shell: bash
     - run: |
         echo "SHORT_SHA=`echo ${{github.event.after}} | cut -c1-7`" >> $GITHUB_ENV
