@@ -80,7 +80,7 @@ runs:
             issue_number: context.issue.number,
           })
           const botComment = comments.find(comment => {
-            return comment.user.type === 'Bot' && comment.body.includes('Tests coverage Table')
+            return comment.user.type === 'Bot' && comment.body.includes('Tests coverage table')
           })
           
           const output = `#### Tests coverage table for [${process.env.SHORT_SHA}](${process.env.COMMIT_URL}) commit.
