@@ -73,7 +73,6 @@ runs:
       env:
         COVERAGE_TABLE: "${{ steps.run-tests.outputs.output-table }}"
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner,
