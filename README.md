@@ -51,12 +51,12 @@ jobs:
     runs-on: ubuntu-latest
     name: Unit tests
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.9.6' # Define your project python version
+          python-version: '3.11.4' # Define your project python version
       - id: run-tests
-        uses: dima-engineer/pytest-reporter@v2.1.0
+        uses: dima-engineer/pytest-reporter@v3.0.0
         with:
           cov-omit-list: tests/*
           cov-threshold-single: 85
