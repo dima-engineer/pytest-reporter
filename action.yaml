@@ -69,6 +69,7 @@ runs:
         echo "COMMIT_URL=`echo https://github.com/${{ github.repository }}/pull/${{ github.event.pull_request.number }}/commits/${{ github.event.after }}`" >> $GITHUB_ENV
       shell: bash
     - name: Pull Request Comment
+      if: ${{ env.PULL_NUMBER }}
       uses: actions/github-script@v6
       env:
         COVERAGE_TABLE: "${{ steps.run-tests.outputs.output-table }}"
@@ -101,6 +102,21 @@ runs:
               body: output
             })
           }
+    - name: Commit Comment
+      if: ${{ !env.PULL_NUMBER }}
+      uses: actions/github-script@v6
+      env:
+        COVERAGE_TABLE: "${{ steps.run-tests.outputs.output-table }}"
+      with:
+        script: |
+          const output = `#### Tests coverage table for [${process.env.SHORT_SHA}](${process.env.COMMIT_URL}) commit.
+          ${process.env.COVERAGE_TABLE}`;
+          github.rest.repos.createCommitComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            commit_sha: "${{github.event.after}}",
+            body: output,
+          });
     - id: check-threashold
       run: |
         if [ "${{ steps.run-tests.outputs.cov-threshold-single-fail }}" == "true" ]; then
