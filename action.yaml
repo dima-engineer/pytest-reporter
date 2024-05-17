@@ -71,6 +71,7 @@ runs:
     - name: Pull Request Comment
       if: ${{ env.PULL_NUMBER }}
       uses: actions/github-script@v6
+      continue-on-error: true
       env:
         COVERAGE_TABLE: "${{ steps.run-tests.outputs.output-table }}"
       with:
@@ -105,6 +106,7 @@ runs:
     - name: Commit Comment
       if: ${{ !env.PULL_NUMBER }}
       uses: actions/github-script@v6
+      continue-on-error: true
       env:
         COVERAGE_TABLE: "${{ steps.run-tests.outputs.output-table }}"
       with:
