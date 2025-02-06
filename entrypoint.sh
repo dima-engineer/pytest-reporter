@@ -39,13 +39,13 @@ then
   python -m poetry install
   python -m poetry add $TESTING_TOOLS
   python -m poetry shell
-elif [ -f "./pyproject.toml" ] && [ -f "./uv.lock" ];
+elif  [ -f "./Pipfile" ] && [ -f "./Pipfile.lock" ];
 then
   python -m pip install pipenv
   pipenv install --dev $TESTING_TOOLS
   pipenv install --dev --system
   pipenv --rm
-elif [ -f "./Pipfile" ] && [ -f "./Pipfile.lock" ];
+elif [ -f "./pyproject.toml" ] && [ -f "./uv.lock" ];
 then
   python -m pip install uv
   python -m uv sync --frozen
