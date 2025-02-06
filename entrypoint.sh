@@ -28,7 +28,7 @@ fi
 if [ -f "./pyproject.toml" ] && [ -f "./poetry.lock" ]
 then
   poetry_version=$8
-  if [ $poetry_version ]
+  if [ $poetry_version != "latest" ]
   then
     echo "Poetry version $poetry_version provided"
     python -m pip install poetry==$poetry_version
@@ -50,7 +50,7 @@ elif [ -f "./pyproject.toml" ] && [ -f "./uv.lock" ];
 then
   echo "Detected UV package manager"
   uv_version=$9
-  if [ $uv_version ]
+  if [ $uv_version != "latest" ]
   then
     echo "UV version $uv_version provided"
     python -m pip install uv==$uv_version

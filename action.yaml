@@ -37,9 +37,11 @@ inputs:
   poetry-version:
     description: 'Version of poetry. Latest if not specified.'
     required: false
+    default: latest
   uv-version:
     description: 'Version of UV. Latest if not specified.'
     required: false
+    default: latest
 
 outputs:
   output-table: # id of output
