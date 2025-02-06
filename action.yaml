@@ -37,6 +37,11 @@ inputs:
   poetry-version:
     description: 'Version of poetry. Latest if not specified.'
     required: false
+    default: latest
+  uv-version:
+    description: 'Version of UV. Latest if not specified.'
+    required: false
+    default: latest
 
 outputs:
   output-table: # id of output
@@ -62,6 +67,7 @@ runs:
         ${{ inputs.cov-threshold-total }} \
         ${{ inputs.async-tests }} \
         ${{ inputs.poetry-version }} \
+        ${{ inputs.uv-version }} \
       shell: bash
     - run: |
         echo "SHORT_SHA=`echo ${{github.event.after}} | cut -c1-7`" >> $GITHUB_ENV
