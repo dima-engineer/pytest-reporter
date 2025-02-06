@@ -47,10 +47,10 @@ then
   pipenv --rm
 elif [ -f "./pyproject.toml" ] && [ -f "./uv.lock" ];
 then
+  echo "Detected uv package manager"
   python -m pip install uv
-  python -m uv sync --frozen
-  python -m uv add $TESTING_TOOLS
-  source .venv/bin/activate
+  uv venv
+  uv pip install $TESTING_TOOLS
 elif [ -f "$1" ];
 then
   python -m pip install -r "$1" --no-cache-dir --user
