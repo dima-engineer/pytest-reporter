@@ -8,6 +8,7 @@
 # $6: cov-threshold-total
 # $7: async-tests
 # $8: poetry-version
+# $9: uv-version
 
 
 COV_CONFIG_FILE=.coveragerc
@@ -47,8 +48,16 @@ then
   pipenv --rm
 elif [ -f "./pyproject.toml" ] && [ -f "./uv.lock" ];
 then
-  echo "Detected uv package manager"
-  python -m pip install uv
+  echo "Detected UV package manager"
+  uv_version=$9
+  if [ $uv_version ]
+  then
+    echo "UV version $uv_version provided"
+    python -m pip install uv==$uv_version
+  else
+    echo "UV version is not provided. Installing latest version"
+    python -m pip install uv
+  fi
   export UV_PROJECT_ENVIRONMENT=$(python -c "import sys; print(sys.prefix)")
   uv sync --frozen
   uv pip install --system $TESTING_TOOLS

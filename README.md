@@ -1,7 +1,7 @@
 # pytest-reporter
 
 This GitHub action runs python tests using `pytest` and creates a comment for PR with a coverage table.
-It supports projects with the most popular python package managers (`pip`, `poetry`, `pipenv`)
+It supports projects with the most popular python package managers (`pip`, `poetry`, `pipenv`, `uv`)
 
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org)
 
@@ -38,6 +38,9 @@ It supports projects with the most popular python package managers (`pip`, `poet
 
 - `poetry-version`
   - Poetry version to be used. The latest version is used by default
+
+- `uv-version`
+  - UV version to be used. The latest version is used by default
   
 ## Template workflow file
 
