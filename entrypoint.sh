@@ -49,7 +49,7 @@ elif [ -f "./pyproject.toml" ] && [ -f "./uv.lock" ];
 then
   echo "Detected uv package manager"
   python -m pip install uv
-  export UV_PROJECT_ENVIRONMENT=$(which python)
+  export UV_PROJECT_ENVIRONMENT=$(python -c "import sys; print(sys.prefix)")
   uv sync --frozen
   uv pip install --system $TESTING_TOOLS
 elif [ -f "$1" ];
