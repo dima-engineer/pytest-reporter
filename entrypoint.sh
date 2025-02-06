@@ -50,7 +50,9 @@ then
   echo "Detected uv package manager"
   python -m pip install uv
   uv venv
+  uv sync --frozen
   uv pip install $TESTING_TOOLS
+  source .venv/bin/activate
 elif [ -f "$1" ];
 then
   python -m pip install -r "$1" --no-cache-dir --user
