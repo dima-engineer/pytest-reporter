@@ -49,10 +49,9 @@ elif [ -f "./pyproject.toml" ] && [ -f "./uv.lock" ];
 then
   echo "Detected uv package manager"
   python -m pip install uv
-  uv venv
+  export UV_PROJECT_ENVIRONMENT=/usr/local
   uv sync --frozen
   uv pip install $TESTING_TOOLS
-  source .venv/bin/activate
 elif [ -f "$1" ];
 then
   python -m pip install -r "$1" --no-cache-dir --user
