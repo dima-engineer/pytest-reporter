@@ -30,6 +30,7 @@ elif 100 >= total_coverage > 90:
 
 
 output.append(f'![pytest-reporter-badge](https://img.shields.io/static/v1?label=pytest-reporter🛡️&message={total_coverage}%&color={color})')
+output.append('<details><summary>Test Coverage Report</summary>\n')
 output.append('|Name|Stmts|Miss|Cover|')
 output.append('| ------ | ------ | ------ | ------ |')
 
@@ -49,6 +50,7 @@ totals = data["totals"]
 
 
 output.append(f'|TOTAL|{totals["num_statements"]}|{totals["missing_lines"]}|{total_coverage}%|')
+output.append('\n</details>')
 
 
 print(*output, sep="\n")
