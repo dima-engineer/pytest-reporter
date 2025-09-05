@@ -59,7 +59,7 @@ then
     python -m pip install uv
   fi
   export UV_PROJECT_ENVIRONMENT=$(python -c "import sys; print(sys.prefix)")
-  uv sync --frozen
+  uv sync --frozen --dev
   uv pip install --system $TESTING_TOOLS
 elif [ -f "$1" ];
 then
