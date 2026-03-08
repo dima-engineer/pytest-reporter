@@ -71,14 +71,17 @@ else
 fi 
 
 
-# write omit str list to coverage file
-cat << EOF > "$COV_CONFIG_FILE"
+# write omit str list to coverage file only if cov-omit-list is provided
+if [ -n "$4" ]
+then
+  cat << EOF > "$COV_CONFIG_FILE"
 [run]
 omit = $4
 EOF
-
-# Run pytest
-coverage run --source="$2" --rcfile=.coveragerc  -m pytest "$3"
+  coverage run --source="$2" --rcfile=.coveragerc -m pytest "$3"
+else
+  coverage run --source="$2" -m pytest "$3"
+fi
 
 if [ $? == 1 ]
 then

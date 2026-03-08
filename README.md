@@ -26,6 +26,7 @@ It supports projects with the most popular python package managers (`pip`, `poet
 
 - `cov-omit-list`
   - list of directories and/or files to ignore
+  - if left empty, the omit list from the project config (`.coveragerc` or `pyproject.toml`) will be used
 
 - `cov-threshold-single`
   - fail if any single file coverage is less than threshold
