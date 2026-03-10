@@ -79,6 +79,9 @@ then
 omit = $4
 EOF
   coverage run --source="$2" --rcfile=.coveragerc -m pytest "$3"
+elif [ -f "./pyproject.toml" ]
+then
+  coverage run --source="$2" --rcfile=pyproject.toml -m pytest "$3"
 else
   coverage run --source="$2" -m pytest "$3"
 fi
