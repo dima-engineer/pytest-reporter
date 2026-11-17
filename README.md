@@ -7,8 +7,12 @@ It supports projects with the most popular python package managers (`pip`, `poet
 
 ## Python Packages Used
 
+The latest versions of these packages are installed on every run:
+
 - [`pytest`](https://pypi.org/project/pytest/)
+- [`pytest-mock`](https://pypi.org/project/pytest-mock/)
 - [`coverage`](https://pypi.org/project/coverage/)
+- [`pytest-asyncio`](https://pypi.org/project/pytest-asyncio/) (only when `async-tests` is `true`)
 
 ## Optional Inputs
 
@@ -58,12 +62,13 @@ jobs:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.11.4' # Define your project python version
+          python-version: '3.14' # Define your project python version
       - id: run-tests
-        uses: dima-engineer/pytest-reporter@v3
+        uses: dima-engineer/pytest-reporter@v4
         with:
           cov-omit-list: tests/*
           cov-threshold-single: 85
           cov-threshold-total: 90
           async-tests: true
-          poetry-version: 1.4.2
+          poetry-version: 2.5.1
+```
