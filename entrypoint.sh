@@ -39,7 +39,6 @@ then
   python -m poetry config virtualenvs.create false
   python -m poetry install
   python -m poetry add $TESTING_TOOLS
-  python -m poetry shell
 elif  [ -f "./Pipfile" ] && [ -f "./Pipfile.lock" ];
 then
   python -m pip install pipenv
